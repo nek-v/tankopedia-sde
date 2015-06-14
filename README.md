@@ -33,24 +33,24 @@ yiic dump --stdout --info --pretty
 ## More params
 
 ### BASIC PARAMETERS
---all It includes all of the following options
---achievements Get Achievements
---arenas Get Arenas
---info Get Tankopedia info
---personalmissions Get Personal Missions
---provisions Get Equipment and Consumables
---tankchassis Get Suspensions
---tankengines Get Engines
---tankguns Get Guns
---tankinfo Get Vehicle details
---tankradios Get Radios
---tanks Get List of vehicles
---tankturrets Get Turrets
---vehicleprofile Get Vehicle characteristics
---vehicles Get Vehicles
+* --all It includes all of the following options
+* --achievements Get Achievements
+* --arenas Get Arenas
+* --info Get Tankopedia info
+* --personalmissions Get Personal Missions
+* --provisions Get Equipment and Consumables
+* --tankchassis Get Suspensions
+* --tankengines Get Engines
+* --tankguns Get Guns
+* --tankinfo Get Vehicle details
+* --tankradios Get Radios
+* --tanks Get List of vehicles
+* --tankturrets Get Turrets
+* --vehicleprofile Get Vehicle characteristics
+* --vehicles Get Vehicles
  
 ### ADVANCED PARAMETERS
---language Set Localization language. Default: EN
---pretty Enable Pretty JSON output. Default: disable
---stdout Enable stdout output.
+* --language Set Localization language. Default: EN
+* --pretty Enable Pretty JSON output. Default: disable
+* --stdout Enable stdout output.
 
