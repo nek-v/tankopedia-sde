@@ -1,0 +1,7 @@
+nbproject/*
+vendor/*
+runtime/*
+!runtime/.gitignore
+data/*
+!data/.gitignore
+config/params.php
