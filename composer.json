@@ -1,0 +1,18 @@
+{
+    "name": "nek-v/tankopedia-sde",
+    "description": "Tankopedia static data export",
+    "keywords": ["wargaming", "tankopedia", "sde"],
+    "authors": [
+        {
+            "name": "nek",
+            "email": "nek@srez.org",
+            "homepage": "http://srez.org",
+            "role": "Devloper"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii": "^1.1"
+    }
+}

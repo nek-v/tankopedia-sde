@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Phing build config -->
+<project name="tankopedia-sde" basedir="." default="upgrade">
+
+    <target name="clean">
+        <delete includeemptydirs="true">
+            <fileset dir=".">
+                <include name="composer.phar" />
+            </fileset>
+            <fileset dir="config">
+                <include name="params.php" />
+            </fileset>
+            <fileset dir="data" includes="**">
+                <exclude name=".gitignore"/>
+            </fileset>
+            <fileset dir="runtime" includes="**">
+                <exclude name=".gitignore"/>
+            </fileset>
+            <fileset dir="vendor" defaultexcludes="false">
+                <include name=""/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="composer">
+        <if>
+            <available file="composer.phar" />
+            <then></then>
+            <else>
+                <echo>Install composer</echo>
+                <exec executable="php" passthru="true" checkreturn="true">
+                    <arg value="-r" />
+                    <arg value="readfile('https://getcomposer.org/installer');" />
+                    <arg value="|" />
+                    <arg value="php" />
+                </exec>
+                <chmod file="composer.phar" mode="664" />
+            </else>
+        </if>
+        <echo>Install vendors</echo>
+        <exec executable="php" passthru="true" checkreturn="true">
+            <arg value="composer.phar" />
+            <arg value="install" />
+            <arg value="--no-dev" />
+        </exec>
+    </target>
+
+    <target name="set_permissions">
+        <chmod file="data" mode="0777" />
+        <chmod file="runtime" mode="0777" />
+        <chmod file="yiic" mode="0755"/>
+    </target>
+    
+    <target name="application_id" description="Configure application_id">
+        <input propertyname="application_id" defaultValue="demo"
+               promptChar="?">Enter the application_id:</input>
+        <copy file="config/params.php.dist"
+              tofile="config/params.php" overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="[[" endtoken="]]">
+                    <token key="application_id" value="${application_id}" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+    </target>
+    
+    
+    <target name="archive" depends="clean">
+        <delete includeemptydirs="true">
+            <fileset dir="." includes="*.gz" />
+        </delete>
+        <fileset dir="." id="zipFiles">
+            <exclude name="**nbproject/**" />
+            <exclude name="composer.phar" />
+        </fileset>
+        <tar destfile="${phing.project.name}.tar.gz" compression="gzip">
+            <fileset refid="zipFiles" />
+        </tar>
+    </target>
+
+    <target name="crontab" description="Set Crontab">
+        <echo>Add cron jobs</echo>
+        <exec
+            command='/bin/echo -en "`crontab -l 2>/dev/null`\n0 0 * * *  php `pwd`/yiic dump --all --pretty\n\n" | crontab - 2>/dev/null'
+            passthru="true" checkreturn="true" />
+    </target>
+
+    <target name="upgrade" depends="clean, composer, set_permissions"/>
+    <target name="deploy" depends="clean, composer, set_permissions, application_id, crontab" />
+</project>
