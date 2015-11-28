@@ -36,17 +36,16 @@ yiic dump --stdout --info --pretty
 * --all It includes all of the following options
 * --achievements Get Achievements
 * --arenas Get Arenas
+* --boosters Get Boosters
 * --info Get Tankopedia info
 * --personalmissions Get Personal Missions
 * --provisions Get Equipment and Consumables
 * --tankchassis Get Suspensions
 * --tankengines Get Engines
 * --tankguns Get Guns
-* --tankinfo Get Vehicle details
 * --tankradios Get Radios
 * --tanks Get List of vehicles
 * --tankturrets Get Turrets
-* --vehicleprofile Get Vehicle characteristics
 * --vehicles Get Vehicles
  
 ### ADVANCED PARAMETERS

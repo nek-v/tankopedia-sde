@@ -20,6 +20,13 @@ class DumpCommand extends CConsoleCommand {
      * @var boolean
      */
     public $arenas;
+    
+    /**
+     * Boosters
+     * 
+     * @var boolean
+     */
+    public $boosters;
 
     /**
      * Tankopedia information
@@ -34,6 +41,13 @@ class DumpCommand extends CConsoleCommand {
      * @var boolean
      */
     public $personalmissions;
+    
+    /**
+     * Provisions
+     * 
+     * @var boolean
+     */
+    public $provisions;
 
     /**
      * Suspensions
@@ -57,13 +71,6 @@ class DumpCommand extends CConsoleCommand {
     public $tankguns;
 
     /**
-     * Vehicle details
-     * 
-     * @var boolean
-     */
-    public $tankinfo;
-
-    /**
      * Radios
      * 
      * @var boolean
@@ -83,13 +90,6 @@ class DumpCommand extends CConsoleCommand {
      * @var boolean
      */
     public $tankturrets;
-
-    /**
-     * Vehicle characteristics
-     * 
-     * @var boolean
-     */
-    public $vehicleprofile;
 
     /**
      * Vehicles
@@ -168,11 +168,9 @@ BASIC PARAMETERS
   --tankchassis Get Suspensions
   --tankengines Get Engines
   --tankguns Get Guns
-  --tankinfo Get Vehicle details
   --tankradios Get Radios
   --tanks Get List of vehicles
   --tankturrets Get Turrets
-  --vehicleprofile Get Vehicle characteristics
   --vehicles Get Vehicles
  
 ADVANCED PARAMETERS
@@ -198,6 +196,9 @@ EOD;
         } else if (isset($this->arenas)) {
             $this->item = 'arenas';
             $this->getItem();
+        } else if (isset($this->boosters)) {
+            $this->item = 'boosters';
+            $this->getItem();
         } else if (isset($this->info)) {
             $this->item = 'info';
             $this->getItem();
@@ -216,9 +217,6 @@ EOD;
         } else if (isset($this->tankguns)) {
             $this->item = 'tankguns';
             $this->getItem();
-        } else if (isset($this->tankinfo)) {
-            $this->item = 'tankinfo';
-            $this->getItem();
         } else if (isset($this->tankradios)) {
             $this->item = 'tankradios';
             $this->getItem();
@@ -228,11 +226,8 @@ EOD;
         } else if (isset($this->tankturrets)) {
             $this->item = 'tankturrets';
             $this->getItem();
-        } else if (isset($this->vehicleprofile)) {
-            $this->item = 'vehicleprofile';
-            $this->getItem();
         } else if (isset($this->vehicles)) {
-            $this->vehicles = 'vehicles';
+            $this->item = 'vehicles';
             $this->getItem();
         } else {
             echo $this->getHelp();
@@ -244,9 +239,9 @@ EOD;
      */
     private function getAll() {
         $source = [
-            'achievements', 'arenas', 'info', 'personalmissions', 'provisions ',
-            'tankchassis', 'tankengines', 'tankguns', 'tankinfo', 'tankradios',
-            'tanks', 'tankturrets', 'vehicleprofile', 'vehicles'
+            'achievements', 'arenas', 'boosters', 'info', 'personalmissions',
+            'provisions', 'tankchassis', 'tankengines', 'tankguns', 'tankradios',
+            'tanks', 'tankturrets', 'vehicles'
         ];
         $path = dirname(__FILE__) . '/../data/';
         foreach ($source as $item) {
@@ -292,13 +287,14 @@ EOD;
 
     /**
      * @param string $url
+     * @param string $method
      * @return string
      */
-    private static function requestHttp($url) {
+    private static function requestHttp($url, $method='POST') {
         $options = [
             'http' => [
-                'method' => 'POST',
-                'user_agent' => 'FapstatCrawler/0.1.1 (+http://fapstat.ru)'
+                'method' => $method,
+                'user_agent' => 'FapStatCrawler/0.1.1 (+http://fapstat.ru)'
             ]
         ];
         $context = stream_context_create($options);
