@@ -14,11 +14,13 @@ For details, see the following link: https://ru.wargaming.net/developers/api_ref
 Download and extract tankopedia-sde
 
 Install [phing](https://github.com/phingofficial/phing) via composer:
+
 ```bash
 composer global require phing/phing
 ```
 
 Run phing in the directory with the project:
+
 ```bash
 phing deploy
 ```
@@ -27,28 +29,28 @@ During the installation, enter your application_id at [Wargaming.net](https://ru
 ## Usage
 
 ```bash
-yiic dump --stdout --info --pretty
+yii dump --stdout --info --pretty
 ```
 
-## More params
+## More usage
 
-### BASIC PARAMETERS
-* --all It includes all of the following options
-* --achievements Get Achievements
-* --arenas Get Arenas
-* --boosters Get Boosters
-* --info Get Tankopedia info
-* --personalmissions Get Personal Missions
-* --provisions Get Equipment and Consumables
-* --tankchassis Get Suspensions
-* --tankengines Get Engines
-* --tankguns Get Guns
-* --tankradios Get Radios
-* --tanks Get List of vehicles
-* --tankturrets Get Turrets
-* --vehicles Get Vehicles
+* yii dump/all                It includes all of the following options
+* yii dump/achievements       Get Achievements
+* yii dump/arenas             Get Arenas
+* yii dump/boosters           Get Boosters
+* yii dump/info               Get Info
+* yii dump/personal-missions  Get Personal Missions
+* yii dump/provisions         Get Provisions
+* yii dump/tank-chassis       Get Tank Chassis
+* yii dump/tank-engines       Get Tank Engines
+* yii dump/tank-guns          Get Tank Guns
+* yii dump/tank-radios        Get Tank Radios
+* yii dump/tank-turrets       Get Tank Turrets
+* yii dump/tanks              Get Tanks
+* yii dump/vehicles           Get Vehicles
+
  
-### ADVANCED PARAMETERS
+## ADVANCED PARAMETERS
 * --language Set Localization language. Default: EN
 * --pretty Enable Pretty JSON output. Default: disable
 * --stdout Enable stdout output.

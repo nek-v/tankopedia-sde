@@ -48,7 +48,7 @@
     <target name="set_permissions">
         <chmod file="data" mode="0777" />
         <chmod file="runtime" mode="0777" />
-        <chmod file="yiic" mode="0755"/>
+        <chmod file="yii" mode="0755"/>
     </target>
     
     <target name="application_id" description="Configure application_id">
@@ -81,10 +81,19 @@
     <target name="crontab" description="Set Crontab">
         <echo>Add cron jobs</echo>
         <exec
-            command='/bin/echo -en "`crontab -l 2>/dev/null`\n0 0 * * *  php `pwd`/yiic dump --all --pretty\n\n" | crontab - 2>/dev/null'
+            command='/bin/echo -en "`crontab -l 2>/dev/null`\n0 0 * * *  php `pwd`/yii dump/all --pretty\n\n" | crontab - 2>/dev/null'
             passthru="true" checkreturn="true" />
     </target>
 
     <target name="upgrade" depends="clean, composer, set_permissions"/>
-    <target name="deploy" depends="clean, composer, set_permissions, application_id, crontab" />
+    
+    <target name="deploy">
+        <phingcall target="clean" />
+        <phingcall target="composer" />
+        <phingcall target="set_permissions" />
+        <phingcall target="application_id" />
+        <phingcall target="crontab" />
+        <echo>Usage: yii dump/all --stdout --pretty</echo>
+    </target>
+    
 </project>

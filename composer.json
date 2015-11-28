@@ -6,13 +6,35 @@
         {
             "name": "nek",
             "email": "nek@srez.org",
-            "homepage": "http://srez.org",
             "role": "Devloper"
         }
     ],
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii": "^1.1"
+        "yiisoft/yii2": "^2.0"
+    },
+     "config": {
+        "process-timeout": 1800,
+        "vendor-dir": "vendor"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject"
+        ]
+    },
+    "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "runtime": "0777",
+                    "yii": "0755"
+                }
+            ]
+        },
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
     }
 }

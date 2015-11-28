@@ -1,6 +1,5 @@
 <?php
+
 return [
-    'params'    => [
-        'appId' => '[[application_id]]'
-    ]
+    'appId' => '[[application_id]]'
 ];
